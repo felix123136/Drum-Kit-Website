@@ -1,61 +1,44 @@
 const buttons = document.querySelectorAll('.drum');
+
+function playSound(key) {
+    if(key === 'w') {
+        createjs.Sound.registerSound('sounds/crash.mp3', 'crash');
+        createjs.Sound.play('crash');
+    }else if(key === 'a') {
+        createjs.Sound.registerSound('sounds/kick-bass.mp3', 'kick-bass');
+        createjs.Sound.play('kick-bass');
+    }else if(key === 's') {
+        createjs.Sound.registerSound('sounds/snare.mp3', 'snare');
+        createjs.Sound.play('snare');
+    }else if(key === 'd') {
+        createjs.Sound.registerSound('sounds/tom-1.mp3', 'tom-1');
+        createjs.Sound.play('tom-1');
+    }else if(key === 'j') {
+        createjs.Sound.registerSound('sounds/tom-2.mp3', 'tom-2');
+        createjs.Sound.play('tom-2');
+    }else if(key === 'k') {
+        createjs.Sound.registerSound('sounds/tom-3.mp3', 'tom-3');
+        createjs.Sound.play('tom-3');
+    }else if(key === 'l') {
+        createjs.Sound.registerSound('sounds/tom-4.mp3', 'tom-4');
+        createjs.Sound.play('tom-4');
+    }
+}
+
 for(let button of buttons) {
     button.addEventListener('click', () => {
         button.classList.add('pressed');
         setTimeout(() => {
             button.classList.remove('pressed');
         }, 200);
-        if(button.classList.contains('w')) {
-            let audio = new Audio('sounds/crash.mp3');
-            audio.play();
-        }else if(button.classList.contains('a')) {
-            let audio = new Audio('sounds/kick-bass.mp3');
-            audio.play();
-        }else if(button.classList.contains('s')) {
-            let audio = new Audio('sounds/snare.mp3');
-            audio.play();
-        }else if(button.classList.contains('d')) {
-            let audio = new Audio('sounds/tom-1.mp3');
-            audio.play();
-        }else if(button.classList.contains('j')) {
-            let audio = new Audio('sounds/tom-2.mp3');
-            audio.play();
-        }else if(button.classList.contains('k')) {
-            let audio = new Audio('sounds/tom-3.mp3');
-            audio.play();
-        }else if(button.classList.contains('l')) {
-            let audio = new Audio('sounds/tom-4.mp3');
-            audio.play();
-        }
+        playSound(button.innerText);
     })
 }
-window.addEventListener('keydown', function(e) {
-    const buttonClass = `.${e.key}`;
-    const button = document.querySelector(buttonClass);
+addEventListener('keydown', function(e) {
+    const button = document.querySelector(`.${e.key}`);
     button.classList.add('pressed');
     setTimeout(() => {
         button.classList.remove('pressed');
     }, 200);
-    if(e.key === 'w') {
-        let audio = new Audio('sounds/crash.mp3');
-        audio.play();
-    }else if(e.key === 'a') {
-        let audio = new Audio('sounds/kick-bass.mp3');
-        audio.play();
-    }else if(e.key === 's') {
-        let audio = new Audio('sounds/snare.mp3');
-        audio.play();
-    }else if(e.key === 'd') {
-        let audio = new Audio('sounds/tom-1.mp3');
-        audio.play();
-    }else if(e.key === 'j') {
-        let audio = new Audio('sounds/tom-2.mp3');
-        audio.play();
-    }else if(e.key === 'k') {
-        let audio = new Audio('sounds/tom-3.mp3');
-        audio.play();
-    }else if(e.key === 'l') {
-        let audio = new Audio('sounds/tom-4.mp3');
-        audio.play();
-    }
+    playSound(e.key);
 })
